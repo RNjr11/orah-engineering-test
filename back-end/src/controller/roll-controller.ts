@@ -17,9 +17,10 @@ export class RollController {
   async createRoll(request: Request, response: Response, next: NextFunction) {
     const { body: params } = request
 
+    let today = new Date()
     const createRollInput: CreateRollInput = {
       name: params.name,
-      completed_at: params.completed_at,
+      completed_at: params.completed_at ? new Date(params.completed_at) : today // Provition For Date and Time saving Automatically if not Provided From UI
     }
     const roll = new Roll()
     roll.prepareToCreate(createRollInput)
